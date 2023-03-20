@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -34,6 +35,7 @@ public class Player_Controller : MonoBehaviour
     void Update()
     {
         Movimento();
+
     }
 
 
@@ -64,7 +66,7 @@ public class Player_Controller : MonoBehaviour
         }
         
     }
-
+    
     void Jump()
     {
         
