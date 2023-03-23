@@ -159,3 +159,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   eu: {fileID: 2589851712553826410}
   canhao: {fileID: 8226497014611580123, guid: 9304de0c687db264dba0f12c177b0f18, type: 3}
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 8

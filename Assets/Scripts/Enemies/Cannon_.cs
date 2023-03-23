@@ -5,7 +5,7 @@ using UnityEngine;
 public class Cannon_ : MonoBehaviour
 {
     [SerializeField]Transform ShotPoint;
-    float ShootRate = 1f;
+    float ShootRate = 0.25f;
     float nextShootTime = 0f;
     [SerializeField] Animator animator;
     [SerializeField] GameObject cannonBall;

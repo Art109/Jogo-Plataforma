@@ -9,6 +9,11 @@ public class CannonBall : MonoBehaviour
     float speed = 20f;
     [SerializeField] GameObject eu;
     [SerializeField] GameObject canhao;
+
+    float explosionRange = 0.5f;
+    int explosionDamage = 60;
+    [SerializeField] LayerMask playerLayer;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -16,7 +21,7 @@ public class CannonBall : MonoBehaviour
         RB = GetComponent<Rigidbody2D>();
        
         
-            RB.velocity = new Vector2(speed, RB.velocity.y);
+            RB.velocity = new Vector2(-speed, RB.velocity.y);
         
 
 
@@ -38,6 +43,18 @@ public class CannonBall : MonoBehaviour
     {
         //Animação de explosão
         animator.SetTrigger("Explode");
+
+        //Detecta o player que foi atingido
+        Collider2D[] hitPlayer = Physics2D.OverlapCircleAll(transform.position, explosionRange, playerLayer);
+
+        //Causa dano
+        foreach (Collider2D player in hitPlayer)
+        {
+            player.GetComponent<Player_Combat>().TakeDamage(explosionDamage);
+            Debug.Log("Acertei o" + player.name);
+        }
+
+
 
         //Destroi objeto
         Destroy(eu, 0.15f);
