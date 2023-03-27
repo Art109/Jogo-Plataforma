@@ -6,7 +6,7 @@ public class Player_Combat : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    public int maxHealth = 100;
+    public int maxHealth = 3;
     int currentHealth;
 
     [SerializeField] Animator animator;
@@ -18,6 +18,9 @@ public class Player_Combat : MonoBehaviour
 
     public float AttackRate = 2f;
     float nextAttackTime = 0f;
+
+    public float iFrame = 0.5f;
+    float next_iFrame = 0f;
 
 
     void Start()
@@ -63,11 +66,25 @@ public class Player_Combat : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        //Reducao de vida
-        currentHealth -= damage;
 
-        //Animacao de dano
-        animator.SetTrigger("Hit");
+        if (Time.time >= next_iFrame)
+        {
+
+            //Reducao de vida
+            currentHealth -= damage;
+            GameController.instance.removeVida(currentHealth, maxHealth);
+
+
+            //Animacao de dano
+            animator.SetTrigger("Hit");
+
+            next_iFrame = Time.time + 1f / iFrame;
+
+
+
+        }
+        
+        
 
         Debug.Log(currentHealth);
         //Morte
@@ -76,6 +93,18 @@ public class Player_Combat : MonoBehaviour
             Die();
         }
 
+    }
+
+    public void Heal()
+    {
+        if(currentHealth < 3)
+        {
+            GameController.instance.addVida(currentHealth);
+            currentHealth += 1;
+        }
+        
+        
+        
     }
 
     void Die()

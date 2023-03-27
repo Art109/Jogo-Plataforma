@@ -7,11 +7,9 @@ public class CannonBall : MonoBehaviour
     Rigidbody2D RB;
     Animator animator;
     float speed = 20f;
-    [SerializeField] GameObject eu;
-    [SerializeField] GameObject canhao;
 
     float explosionRange = 0.5f;
-    int explosionDamage = 60;
+    int explosionDamage = 2;
     [SerializeField] LayerMask playerLayer;
 
     // Start is called before the first frame update
@@ -57,7 +55,7 @@ public class CannonBall : MonoBehaviour
 
 
         //Destroi objeto
-        Destroy(eu, 0.15f);
+        Destroy(gameObject, 0.15f);
 
     }
 }
