@@ -7,36 +7,36 @@ using UnityEngine.SocialPlatforms.Impl;
 public class Enemy : MonoBehaviour
 {
 
-    public int maxHealth = 100;
-    int currentHealt;
+    public int maxHealth;
+    protected int currentHealt;
     // Start is called before the first frame update
     [SerializeField] GameObject player;
 
-    [SerializeField] Animator animator;
+    protected Animator animator;
 
 
     //Movimento + IA simples
-    Rigidbody2D rb;
+    protected Rigidbody2D rb;
     [SerializeField] float speed = 2f;
     [SerializeField] bool isRight = false;
     [SerializeField] Transform groundCheck;
     [SerializeField] LayerMask groundLayer;
+    protected int damage;
    
 
     void Start()
     {
-        rb= GetComponent<Rigidbody2D>();
-        currentHealt = maxHealth;
+        
     }
 
     void Update()
     {
-        Movimento();
+ 
     }
 
 
 
-    void Movimento()
+    protected void Movimento()
     {
         animator.SetBool("Run", true);
         if(isRight)
@@ -60,7 +60,7 @@ public class Enemy : MonoBehaviour
 
     void Flip()
     {
-        if (isRight && rb.velocity.x < 0 || !isRight && rb.velocity.x > 0)
+        if (isRight && rb.velocity.x > 0 || !isRight && rb.velocity.x < 0)
         {
             Vector2 localScale = transform.localScale;
             isRight = !isRight;
@@ -95,21 +95,22 @@ public class Enemy : MonoBehaviour
 
     }
 
-    void Die()
+    public virtual void Die()
     {
         //Animacao de Morte
         animator.SetTrigger("Die");
 
         //Morte
-        this.enabled= false;
-        GetComponent<Collider2D>().enabled = false;
+        Destroy(gameObject);
+        /*this.enabled= false;
+        GetComponent<Collider2D>().enabled = false;*/
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
-            player.GetComponent<Player_Combat>().TakeDamage(1);
+            player.GetComponent<Player_Combat>().TakeDamage(damage);
 
             Debug.Log("Acertei o player");
         }
