@@ -26,8 +26,7 @@ public class Diamond : MonoBehaviour
         {
             Destroy(gameObject);
 
-            GameController.instance.totalScore += Score;
-            //GameController.instance.updateScore();
+            GameController.totalScore += Score;
         }
     }
 

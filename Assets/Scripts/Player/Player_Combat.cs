@@ -6,13 +6,13 @@ public class Player_Combat : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    public int maxHealth = 3;
     int currentHealth;
 
     [SerializeField] Animator animator;
     [SerializeField] Transform AttackPoint;
     public float AttackRange = 0.5f;
     [SerializeField] LayerMask enemyLayer;
+    
 
     int AttackDamage = 40;
 
@@ -25,14 +25,16 @@ public class Player_Combat : MonoBehaviour
 
     void Start()
     {
-        currentHealth = maxHealth;
+        currentHealth = GameController.vidaAtual;
+
+
     }
 
     // Update is called once per frame
     void Update()
     {
-
-        if(Time.time >= nextAttackTime) {
+        currentHealth = GameController.vidaAtual;
+        if (Time.time >= nextAttackTime) {
             if (Input.GetKeyDown(KeyCode.Z))
             {
 
@@ -41,6 +43,8 @@ public class Player_Combat : MonoBehaviour
 
             }
         }
+
+        Die();
        
     }
 
@@ -71,8 +75,8 @@ public class Player_Combat : MonoBehaviour
         {
 
             //Reducao de vida
-            currentHealth -= damage;
-            GameController.instance.removeVida(currentHealth, maxHealth);
+            GameController.vidaAtual -= damage;
+            
 
 
             //Animacao de dano
@@ -88,10 +92,7 @@ public class Player_Combat : MonoBehaviour
 
         Debug.Log(currentHealth);
         //Morte
-        if (currentHealth <= 0)
-        {
-            Die();
-        }
+        
 
     }
 
@@ -99,8 +100,8 @@ public class Player_Combat : MonoBehaviour
     {
         if(currentHealth < 3)
         {
-            GameController.instance.addVida(currentHealth);
-            currentHealth += 1;
+            GameController.vidaAtual++;
+            
         }
         
         
@@ -109,12 +110,16 @@ public class Player_Combat : MonoBehaviour
 
     void Die()
     {
-        //Animacao de Morte
-        animator.SetTrigger("Die");
+        if (currentHealth <= 0)
+        {
+            //Animacao de Morte
+            animator.SetTrigger("Die");
 
-        //Morte
-        this.enabled = false;
-        GetComponent<Collider2D>().enabled = false;
+            //Morte
+            this.enabled = false;
+            GetComponent<Collider2D>().enabled = false;
+        }
+        
     }
 
     private void OnDrawGizmos()

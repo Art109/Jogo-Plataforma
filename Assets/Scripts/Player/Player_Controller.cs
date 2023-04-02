@@ -23,6 +23,8 @@ public class Player_Controller : MonoBehaviour
 
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
+
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -113,6 +115,8 @@ public class Player_Controller : MonoBehaviour
         }
         
     }
+
+    
 
     private bool isGrounded()
     {

@@ -2,19 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
 
-    public int totalScore = 0;
+    public static int totalScore = 0;
     [SerializeField] private Text scoreText;
     [SerializeField] private Image[] vida;
 
-    public static GameController instance;
+
+   
+    public static int vidaAtual = 3;
+    int vidaMaxima = 3;
+
+  
     // Start is called before the first frame update
     void Start()
     {
-        instance= this;
+     
     }
 
     // Update is called once per frame
@@ -22,6 +28,7 @@ public class GameController : MonoBehaviour
     {
         updateScore();
         updateVida();
+    
     }
 
     public void updateScore()
@@ -29,27 +36,26 @@ public class GameController : MonoBehaviour
         scoreText.text = totalScore.ToString();
     }
 
+   
+
+                    
     public void updateVida()
     {
-        
-    }
-
-    public void addVida(int vida)
-    {
-        if(vida < 3)
+        for(int i = 0; i < vidaMaxima; i++)
         {
-            this.vida[vida].enabled = true;
+            vida[i].enabled= false;
         }
-        
-    }
-                    
-    public void removeVida(int vidaAtual,int vidaMaxima)
-    {
 
-        for (int i = vidaMaxima; i > vidaAtual ; --i){
-            vida[i-1].enabled = false;
+        for (int i = 0; i < vidaAtual ; i++){
+            vida[i].enabled = true;
         }
         
     
+    }
+    
+
+    public static void TrocaCena(int cena)
+    {
+        SceneManager.LoadScene(cena);
     }
 }

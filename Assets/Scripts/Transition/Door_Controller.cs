@@ -10,6 +10,7 @@ public class Door_Controller : MonoBehaviour
     Animator animator;
     bool checkPlayer = false;
 
+
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -18,18 +19,20 @@ public class Door_Controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.UpArrow) && checkPlayer)
+        Abrir();
+    }
+
+
+    public void Abrir()
+    {
+        if (Input.GetKeyDown(KeyCode.UpArrow) && checkPlayer)
         {
 
             animator.SetTrigger("Open");
-            SceneManager.LoadScene(scene);
 
-            
-           
-           
-        } 
+        }
+
     }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.CompareTag("Player")) {
@@ -43,6 +46,12 @@ public class Door_Controller : MonoBehaviour
         {
             checkPlayer = false;
         }
+    }
+
+    public void TrocaCena()
+    {
+        
+        GameController.TrocaCena(scene);
     }
 
 }
