@@ -44,8 +44,13 @@ public class Player_Combat : MonoBehaviour
             }
         }
 
-        Die();
-       
+        if (currentHealth <= 0)
+        {
+            //Animacao de Morte
+            animator.SetBool("Die",true);
+
+        }
+
     }
 
     void Attack()
@@ -112,12 +117,10 @@ public class Player_Combat : MonoBehaviour
     {
         if (currentHealth <= 0)
         {
-            //Animacao de Morte
-            animator.SetTrigger("Die");
 
             //Morte
-            this.enabled = false;
-            GetComponent<Collider2D>().enabled = false;
+            Time.timeScale= 0f;
+            GameController.TrocaCena(0);
         }
         
     }

@@ -58,4 +58,11 @@ public class GameController : MonoBehaviour
     {
         SceneManager.LoadScene(cena);
     }
+
+    public static void Reset()
+    {
+        totalScore= 0;
+        vidaAtual= 3;
+        Time.timeScale = 1;
+    }
 }
