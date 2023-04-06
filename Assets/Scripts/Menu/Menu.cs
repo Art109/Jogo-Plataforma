@@ -6,8 +6,12 @@ using UnityEngine.SceneManagement;
 public class Menu : MonoBehaviour
 {
     // Start is called before the first frame update
+
+
+    
     void Start()
     {
+        
         GameController.Reset();
     }
 
@@ -24,7 +28,7 @@ public class Menu : MonoBehaviour
     public void QuitGame()
     {
         //Editor
-        UnityEditor.EditorApplication.isPlaying= false;
+        //UnityEditor.EditorApplication.isPlaying= false;
         //Compilado
         Application.Quit();
     }

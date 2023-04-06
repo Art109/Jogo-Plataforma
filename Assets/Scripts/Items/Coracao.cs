@@ -26,7 +26,7 @@ public class Coracao : MonoBehaviour
         {
             Destroy(gameObject);
 
-            player.GetComponent<Player_Combat>().Heal();
+            GameController.vidaAtual++;
 
             
         }

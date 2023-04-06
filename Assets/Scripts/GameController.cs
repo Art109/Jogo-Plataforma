@@ -41,6 +41,9 @@ public class GameController : MonoBehaviour
                     
     public void updateVida()
     {
+
+
+        
         for(int i = 0; i < vidaMaxima; i++)
         {
             vida[i].enabled= false;
@@ -49,6 +52,7 @@ public class GameController : MonoBehaviour
         for (int i = 0; i < vidaAtual ; i++){
             vida[i].enabled = true;
         }
+        
         
     
     }

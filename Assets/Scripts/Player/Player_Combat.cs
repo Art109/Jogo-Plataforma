@@ -101,17 +101,7 @@ public class Player_Combat : MonoBehaviour
 
     }
 
-    public void Heal()
-    {
-        if(currentHealth < 3)
-        {
-            GameController.vidaAtual++;
-            
-        }
-        
-        
-        
-    }
+   
 
     void Die()
     {

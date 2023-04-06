@@ -18,5 +18,7 @@ public class Pig : Enemy
     void Update()
     {
         Movimento();
+
+ 
     }
 }
